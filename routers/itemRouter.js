@@ -11,8 +11,8 @@ const {
 } = require("../controllers/itemController");
 router.get("/items", Auth, getAllItems);
 router.get("/items/:id", Auth, getItemById);
-router.post("/items", Auth, createItem);
-router.patch("/items/:id", Auth, updateItemById);
-router.delete("/items/:id", Auth, deleteItemById);
-router.get("/item/reviews/:id", Auth, getItemReviews);
+router.post("/items", createItem);
+router.patch("/items/:id", updateItemById);
+router.delete("/items/:id", deleteItemById);
+router.get("/item/reviews/:id", getItemReviews);
 module.exports = router;

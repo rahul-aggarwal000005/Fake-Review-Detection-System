@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Responsive Product Design</title>
+    <style>
+      .icon-hover:hover {
+        border-color: #3b71ca !important;
+        background-color: white !important;
+      }
+
+      .icon-hover:hover i {
+        color: #3b71ca !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!--Main Navigation-->
+    <form action="/addProduct" method="POST">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" />
+      </div>
+      <div class="form-group">
+        <label for="name">Category</label>
+        <input type="text" class="form-control" id="category" name="category" />
+      </div>
+      <div class="form-group">
+        <label for="name">price</label>
+        <input type="text" class="form-control" id="price" name="price" />
+      </div>
+      <div class="form-group">
+        <label for="name">description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          name="description"
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Image</label>
+        <input type="text" class="form-control" id="image" name="image" />
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    <header><%- include('includes/footer.ejs') %></header>
+    <!-- Footer -->
+  </body>
+</html>

@@ -28,7 +28,6 @@ const createItem = async (req, res) => {
   try {
     const newItem = new Item({
       ...req.body,
-      owner: req.user._id,
     });
     await newItem.save();
     res.status(201).send(newItem);

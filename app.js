@@ -81,6 +81,22 @@ app.get("/product/:id", requireLogin, async (req, res) => {
   }
 });
 
+app.get("/utils", async (req, res) => {
+  try {
+    res.render("helper");
+  } catch (error) {}
+});
+
+app.post("/addProduct", async (req, res) => {
+  try {
+    const body = { ...req.body, price: Number(req.body.price) };
+    console.log(body);
+    let response = await axios.post(`${nodeServer}/api/items`, body);
+    console.log(response.data);
+  } catch (error) {}
+  res.redirect("/utils");
+});
+
 app.get("/logout", requireLogin, async (req, res) => {
   store.remove("token");
   res.redirect("/login");
