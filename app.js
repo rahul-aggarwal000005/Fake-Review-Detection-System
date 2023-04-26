@@ -10,6 +10,7 @@ const app = express();
 const axios = require("axios");
 const nodeServer = process.env.NODE_SERVER;
 const store = require("store2");
+let alert = require("alert");
 store.clearAll();
 
 // Set up the view engine to use EJS
@@ -112,10 +113,13 @@ app.get("/logoutAll", requireLogin, async (req, res) => {
 
 app.post("/review", requireLogin, async (req, res) => {
   try {
-    console.log(req.body);
+    console.log("review Body : ", req.body);
     let response = await axios.post(`${nodeServer}/api/review`, req.body);
-    res.redirect("/product/" + req.body.itemId);
-  } catch (error) {}
+    return res.redirect("/product/" + req.body.itemId);
+  } catch (error) {
+    alert("DONOT Enter a fake review");
+    return res.redirect("/product/" + req.body.itemId);
+  }
 });
 
 const port = process.env.PORT;
