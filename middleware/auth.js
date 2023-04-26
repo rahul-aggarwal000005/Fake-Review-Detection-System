@@ -38,6 +38,7 @@ passport.deserializeUser(async function (id, done) {
 });
 const auth = async (req, res, next) => {
   try {
+    console.log(store("token"));
     const token = store("token");
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findOne({

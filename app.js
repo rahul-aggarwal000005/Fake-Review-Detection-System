@@ -34,7 +34,7 @@ app.use("/api", reviewRouter);
 
 // Check if the user is already logged in
 function requireLogin(req, res, next) {
-  if (req.session.isLoggedIn) {
+  if (store("token")) {
     next();
   } else {
     res.redirect("/login");
@@ -59,7 +59,7 @@ app.get("/home", requireLogin, async (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  console.log("isLoggedIn:", req.session.isLoggedIn);
+  console.log(store("token"));
   if (store("token")) {
     res.redirect("/home");
   } else {
@@ -82,21 +82,14 @@ app.get("/product/:id", requireLogin, async (req, res) => {
 });
 
 app.get("/logout", requireLogin, async (req, res) => {
-  const token = req.session.token;
-  await axios.post(`${nodeServer}/api/logout`, {
-    headers: { authorization: `Bearer ${token}` },
-  });
+  store.remove("token");
+  res.redirect("/login");
 });
 
 app.get("/logoutAll", requireLogin, async (req, res) => {
-  const token = req.session.token;
-  console.log(token);
   try {
-    let response = await axios.post(`${nodeServer}/api/logoutAll`, {
-      headers: { authorization: `Bearer ${token}` },
-    });
-    console.log(response);
-    res.send();
+    store.remove("token");
+    res.redirect("/login");
   } catch (error) {
     res.status(500).send(error);
   }
