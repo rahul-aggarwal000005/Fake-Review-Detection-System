@@ -59,7 +59,6 @@ app.get("/home", requireLogin, async (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  console.log(store("token"));
   if (store("token")) {
     res.redirect("/home");
   } else {
@@ -109,6 +108,14 @@ app.get("/logoutAll", requireLogin, async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   }
+});
+
+app.post("/review", requireLogin, async (req, res) => {
+  try {
+    console.log(req.body);
+    let response = await axios.post(`${nodeServer}/api/review`, req.body);
+    res.redirect("/product/" + req.body.itemId);
+  } catch (error) {}
 });
 
 const port = process.env.PORT;
