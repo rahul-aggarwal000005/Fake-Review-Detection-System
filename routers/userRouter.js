@@ -8,8 +8,8 @@ const {
 } = require("../controllers/userController");
 
 const router = new express.Router();
-router.post("/users", signup);
-router.post("/users/login", login);
-router.post("/users/logout", Auth, logout);
-router.post("/users/logoutAll", Auth, logoutAll);
+router.post("/signup", signup);
+router.post("/login", login);
+router.post("/logout", Auth, logout);
+router.post("/logoutAll", Auth, logoutAll);
 module.exports = router;

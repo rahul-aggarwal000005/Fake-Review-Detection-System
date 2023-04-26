@@ -32,6 +32,11 @@ const itemSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    image: {
+      type: String,
+      default:
+        "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
+    },
   },
   {
     timestamps: true,

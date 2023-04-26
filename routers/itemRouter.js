@@ -14,5 +14,5 @@ router.get("/items/:id", Auth, getItemById);
 router.post("/items", Auth, createItem);
 router.patch("/items/:id", Auth, updateItemById);
 router.delete("/items/:id", Auth, deleteItemById);
-router.get("/item/reviews/:id", getItemReviews);
+router.get("/item/reviews/:id", Auth, getItemReviews);
 module.exports = router;

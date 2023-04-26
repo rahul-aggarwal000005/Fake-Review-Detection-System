@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const store = require("store2");
+// const { getErrorMessage } = require("../utils/notificationMessage");
 
 //signup
 const signup = async (req, res) => {
@@ -22,10 +24,13 @@ const login = async (req, res) => {
       req.body.password
     );
     const token = await user.generateAuthToken();
-    res.send({ user, token });
+    req.session.isLoggedIn = true;
+    req.session.token = token;
+    store("token", token);
+    return res.redirect("/home");
   } catch (error) {
-    // console.log(error);
-    res.status(400).send(error);
+    console.log("Invalid credentials");
+    return res.redirect("/login");
   }
 };
 
@@ -37,7 +42,10 @@ const logout = async (req, res) => {
     });
 
     await req.user.save();
-    res.send();
+    req.session.token = null;
+    req.session.isLoggedIn = false;
+    store.remove("token");
+    res.redirect("/login");
   } catch (error) {
     res.status(500).send();
   }
@@ -48,7 +56,10 @@ const logoutAll = async (req, res) => {
   try {
     req.user.tokens = [];
     await req.user.save();
-    res.send();
+    req.session.isLoggedIn = false;
+    req.session.token = null;
+    store.remove("token");
+    res.redirect("/login");
   } catch (error) {
     res.status(500).send();
   }
